@@ -2,7 +2,7 @@
 
 const axios = require('axios')
 
-const SL_APP_URL = 'https://fathomless-plains-65743.herokuapp.com/api/sl?originSiteId=9248'
+const SL_APP_URL = 'https://fathomless-plains-65743.herokuapp.com/api/sl?transportType=Tram&direction=2&originId=9248'
 
 const getSlTimeHandler = async (conv) => {
   try {
@@ -14,9 +14,8 @@ const getSlTimeHandler = async (conv) => {
     }
 
     const [firstDeparture, secondDeparture, ...others]  = resp.data
-    conv.add(`The first departure is in ${firstDeparture.time.displayTime} from ${firstDeparture.stopAreaName} towards ${firstDeparture.destination}.
-    The second departure is in ${secondDeparture.time.displayTime} from ${secondDeparture.stopAreaName} towards ${secondDeparture.destination}
-    Do you want me to set an alarm when you should leave the house?
+    conv.add(`First in: ${firstDeparture.time.displayTime} from ${firstDeparture.stopAreaName} towards ${firstDeparture.destination}.
+    Second in: ${secondDeparture.time.displayTime} from ${secondDeparture.stopAreaName} towards ${secondDeparture.destination}
     `)
   } catch(e) {
     console.error('Error', e)
